@@ -1,2 +1,2 @@
-# Taal - Partição de Conjuntos
+# Taal - Problema da Partição de Conjuntos
 
