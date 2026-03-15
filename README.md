@@ -1,0 +1,2 @@
+# Taal - Partição de Conjuntos
+
