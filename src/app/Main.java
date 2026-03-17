@@ -17,13 +17,23 @@ public class Main {
             int[] numbers = FileHandler.readInput(inputFilePath);
             PartitionSolver solver = new PartitionSolver(numbers);
 
-            System.out.println("--- Resultado: Backtracking ---");
+            long startTimeBT = System.nanoTime();
             PartitionResult resultBT = solver.solve();
+            long endTimeBT = System.nanoTime();
+            double durationBT = (endTimeBT - startTimeBT) / 1_000_000.0; 
+
+            System.out.println("--- Resultado: Backtracking ---");
             FileHandler.printOutput(resultBT);
+            System.out.printf("Tempo de execução (BT): %.4f ms\n", durationBT);
+
+            long startTimeBB = System.nanoTime();
+            PartitionResult resultBB = solver.solveBranchAndBound();
+            long endTimeBB = System.nanoTime();
+            double durationBB = (endTimeBB - startTimeBB) / 1_000_000.0;
 
             System.out.println("\n--- Resultado: Branch and Bound ---");
-            PartitionResult resultBB = solver.solveBranchAndBound();
             FileHandler.printOutput(resultBB);
+            System.out.printf("Tempo de execução (BB): %.4f ms\n", durationBB);
 
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo de entrada nao encontrado: " + inputFilePath);
