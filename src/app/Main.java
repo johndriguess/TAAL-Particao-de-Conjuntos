@@ -1,3 +1,4 @@
+package app;
 import core.PartitionSolver;
 import io.FileHandler;
 import models.PartitionResult;
@@ -15,8 +16,14 @@ public class Main {
         try {
             int[] numbers = FileHandler.readInput(inputFilePath);
             PartitionSolver solver = new PartitionSolver(numbers);
-            PartitionResult result = solver.solve();
-            FileHandler.printOutput(result);
+
+            System.out.println("--- Resultado: Backtracking ---");
+            PartitionResult resultBT = solver.solve();
+            FileHandler.printOutput(resultBT);
+
+            System.out.println("\n--- Resultado: Branch and Bound ---");
+            PartitionResult resultBB = solver.solveBranchAndBound();
+            FileHandler.printOutput(resultBB);
 
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo de entrada nao encontrado: " + inputFilePath);
