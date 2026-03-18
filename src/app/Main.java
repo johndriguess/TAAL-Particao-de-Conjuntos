@@ -4,8 +4,21 @@ import io.FileHandler;
 import models.PartitionResult;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
+/**
+ * Classe principal do aplicativo. Responsável por inicializar e 
+ * coordenar a leitura, cálculo e exportação dos resultados.
+ */
 public class Main {
+    /**
+     * Método de entrada do programa.
+     * Tenta ler um arquivo especificado nos argumentos ou utiliza o "data/input.txt" por padrão.
+     * Mede os tempos de execução das abordagens Backtracking e Branch & Bound e salva os resultados.
+     *
+     * @param args Argumentos da linha de comando cujo primeiro elemento pode ser o caminho do arquivo de entrada.
+     */
     public static void main(String[] args) {
         String inputFilePath = "data/input.txt";
 
@@ -34,6 +47,20 @@ public class Main {
             System.out.println("\n--- Resultado: Branch and Bound ---");
             FileHandler.printOutput(resultBB);
             System.out.printf("Tempo de execução (BB): %.4f ms\n", durationBB);
+
+            try (PrintWriter writer = new PrintWriter(new FileWriter("data/output.txt"))) {
+                writer.println("--- Resultado: Backtracking ---");
+                FileHandler.writeOutput(resultBT, writer);
+                writer.printf("Tempo de execução (BT): %.4f ms\n", durationBT);
+
+                writer.println("\n--- Resultado: Branch and Bound ---");
+                FileHandler.writeOutput(resultBB, writer);
+                writer.printf("Tempo de execução (BB): %.4f ms\n", durationBB);
+
+                System.out.println("\nResultados salvos com sucesso em data/output.txt");
+            } catch (Exception e) {
+                System.err.println("Erro ao salvar arquivo de output: " + e.getMessage());
+            }
 
         } catch (FileNotFoundException e) {
             System.err.println("Arquivo de entrada nao encontrado: " + inputFilePath);
