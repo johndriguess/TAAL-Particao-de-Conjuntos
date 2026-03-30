@@ -66,4 +66,14 @@ public class PartitionSolver {
         DynamicProgrammingSolver dpSolver = new DynamicProgrammingSolver(this.numbers, this.targetSum);
         return dpSolver.solve();
     }
+
+    /**
+     * Inicia a resolução do problema de partição usando uma Estratégia Gulosa.
+     *
+     * @return Um objeto PartitionResult.
+     */
+    public PartitionResult solveGreedy() {
+        GreedySolver gSolver = new GreedySolver(this.numbers, this.targetSum);
+        return gSolver.solve();
+    }
 }

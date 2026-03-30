@@ -57,6 +57,15 @@ public class Main {
             FileHandler.printOutput(resultDP);
             System.out.printf("Tempo de execução (PD): %.4f ms\n", durationDP);
 
+            long startTimeG = System.nanoTime();
+            PartitionResult resultG = solver.solveGreedy();
+            long endTimeG = System.nanoTime();
+            double durationG = (endTimeG - startTimeG) / 1_000_000.0;
+
+            System.out.println("\n--- Resultado: Estratégia Gulosa ---");
+            FileHandler.printOutput(resultG);
+            System.out.printf("Tempo de execução (G): %.4f ms\n", durationG);
+
             try (PrintWriter writer = new PrintWriter(new FileWriter("data/output.txt"))) {
                 writer.println("--- Resultado: Backtracking ---");
                 FileHandler.writeOutput(resultBT, writer);
@@ -69,6 +78,10 @@ public class Main {
                 writer.println("\n--- Resultado: Programação Dinâmica ---");
                 FileHandler.writeOutput(resultDP, writer);
                 writer.printf("Tempo de execução (PD): %.4f ms\n", durationDP);
+
+                writer.println("\n--- Resultado: Estratégia Gulosa ---");
+                FileHandler.writeOutput(resultG, writer);
+                writer.printf("Tempo de execução (G): %.4f ms\n", durationG);
 
                 System.out.println("\nResultados salvos com sucesso em data/output.txt");
             } catch (Exception e) {
