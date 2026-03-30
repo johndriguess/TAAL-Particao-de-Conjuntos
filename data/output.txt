@@ -1,0 +1,20 @@
+--- Resultado: Backtracking ---
+YES
+3
+1 2 3
+6
+Tempo de execução (BT): 1,1308 ms
+
+--- Resultado: Branch and Bound ---
+YES
+3
+1 2 3
+6
+Tempo de execução (BB): 4,6810 ms
+
+--- Resultado: Programação Dinâmica ---
+YES
+3
+3 2 1
+6
+Tempo de execução (PD): 1,0302 ms

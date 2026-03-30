@@ -48,6 +48,15 @@ public class Main {
             FileHandler.printOutput(resultBB);
             System.out.printf("Tempo de execução (BB): %.4f ms\n", durationBB);
 
+            long startTimeDP = System.nanoTime();
+            PartitionResult resultDP = solver.solveDynamicProgramming();
+            long endTimeDP = System.nanoTime();
+            double durationDP = (endTimeDP - startTimeDP) / 1_000_000.0;
+
+            System.out.println("\n--- Resultado: Programação Dinâmica ---");
+            FileHandler.printOutput(resultDP);
+            System.out.printf("Tempo de execução (PD): %.4f ms\n", durationDP);
+
             try (PrintWriter writer = new PrintWriter(new FileWriter("data/output.txt"))) {
                 writer.println("--- Resultado: Backtracking ---");
                 FileHandler.writeOutput(resultBT, writer);
@@ -56,6 +65,10 @@ public class Main {
                 writer.println("\n--- Resultado: Branch and Bound ---");
                 FileHandler.writeOutput(resultBB, writer);
                 writer.printf("Tempo de execução (BB): %.4f ms\n", durationBB);
+
+                writer.println("\n--- Resultado: Programação Dinâmica ---");
+                FileHandler.writeOutput(resultDP, writer);
+                writer.printf("Tempo de execução (PD): %.4f ms\n", durationDP);
 
                 System.out.println("\nResultados salvos com sucesso em data/output.txt");
             } catch (Exception e) {
